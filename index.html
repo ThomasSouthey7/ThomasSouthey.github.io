@@ -6,20 +6,19 @@
     <title>Thomas Southey's Portfolio</title>
     <style>
         body {
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, sans-serif;
-            background-color: #1b3f50; /* Light background color */
-            color: #1b3f50; /* Main text color */
+            font-family: 'Arial', sans-serif; /* Changed to a sans-serif font */
+            background-color: #1b3f50; 
+            color: #D3D9D4; /* Light text color for readability */
             margin: 0;
             padding: 0;
         }
         h1 {
-            color: #748D92; /* Dark brown for headers */
-            font-size: 5.2em;
+            color: #AFDDE5; /* Light color for headers */
+            font-size: 3.5em; /* Adjusted size for better mobile compatibility */
             text-align: center;
             padding: 40px 0;
         }
         p {
-            color: #D3D9D4; /* Muted green for paragraphs */
             font-size: 1.2em;
             text-align: center;
             padding: 10px 20px;
@@ -28,22 +27,28 @@
             max-width: 1000px;
             margin: 0 auto;
             padding: 40px 20px;
-            background-color: #124E66; /* Softer background for the main container */
+            background-color: #124E66; 
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         footer {
             text-align: center;
             padding: 20px;
-            background-color: #003249; /* Footer with a light golden tone */
-            color: #AFDDE5;
+            background-color: #003249; 
+            color: #AFDDE5; /* Updated footer text color */
         }
         a {
-            color: #AFDDE5; /* Darker color for links */
+            color: #AFDDE5; 
             text-decoration: none;
         }
         a:hover {
-            color: #7C9082; /* Muted green on hover */
+            color: #7C9082; 
+        }
+        #keystrokes {
+            font-size: 1em; /* Size adjustment for keystrokes display */
+            white-space: pre-wrap; /* Preserve whitespace and line breaks */
+            text-align: left; /* Align text to the left for readability */
+            margin: 20px 0;
         }
     </style>
 </head>
@@ -53,11 +58,32 @@
 
     <div class="container">
         <p>This website showcases some of my key projects and skills. Explore and enjoy!</p>
+
+        <h2>Your Keystrokes</h2>
+        <div id="keystrokes">Loading...</div> <!-- Default loading message -->
     </div>
 
     <footer>
         <p>&copy; 2024 Thomas Southey | <a href="#">Contact Me</a></p>
     </footer>
+
+    <!-- JavaScript to fetch keystroke data and display it -->
+    <script>
+        async function fetchKeystrokes() {
+            try {
+                const response = await fetch('C:\\Users\\Thomas\\Desktop\\keylog_data.json'); // Ensure correct path for local development
+                const data = await response.json();
+                const keystrokesDiv = document.getElementById('keystrokes');
+                keystrokesDiv.innerHTML = data.keystrokes.join(' ');
+            } catch (error) {
+                console.error('Error fetching keystroke data:', error);
+                document.getElementById('keystrokes').innerHTML = 'Error loading keystrokes.';
+            }
+        }
+
+        fetchKeystrokes();
+        setInterval(fetchKeystrokes, 5000);  // Refresh every 5 seconds
+    </script>
 
 </body>
 </html>
